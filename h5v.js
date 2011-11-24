@@ -32,7 +32,7 @@
                                     },
                                     show:
                                     {
-                                        'event': ''
+                                        'event': false
                                     },
                                     hide: 
                                     {
