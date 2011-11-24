@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="jquery.qtip.css" rel="stylesheet"/>
+        <style>
+            input.error {
+                -webkit-box-shadow: 0px 0px 5px 1px rgba(255, 0, 0, 1);
+                -moz-box-shadow: 0px 0px 5px 1px rgba(255, 0, 0, 1);
+                box-shadow: 0px 0px 5px 1px rgba(255, 0, 0, 1);
+                border: 2px inset #ccc;
+            }
+        </style>
+    </head>
+    <body>
+        <form action="" method="get">
+            <label>
+                Required
+                <input type="text" required="required" />
+            </label>
+            <br />
+            <label>
+                Required
+                <input type="checkbox" required="required" />
+            </label>
+            <br />
+            <label>
+                Required
+                <input type="radio" required="required" />
+            </label>
+            <br />
+            <label>
+                Required
+                <input type="text" required="required" />
+            </label>
+            <br />
+
+            <button type="submit">Submit</button>
+        </form>
+
+        <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.0.6/modernizr.min.js"></script>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
+        <script type="text/javascript" src="jquery.qtip.js"></script>
+        <script type="text/javascript" src="h5v.js"></script>
+        <script type="text/javascript">
+            $(function() {
+                $('form').h5v({'required':true});
+            });
+        </script>
+    </body>
+</html>
