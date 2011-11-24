@@ -36,7 +36,7 @@
                                     },
                                     hide: 
                                     {
-                                        'event': 'focusout'
+                                        'event': 'focusout change'
                                     },
                                     'events': {
                                         hide: function(e, api) {
