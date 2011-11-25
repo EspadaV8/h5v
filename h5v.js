@@ -68,7 +68,14 @@
                             self.removeClass(opts.errorClass);
                         }
                     });
-                    return ($(this).find('.' + opts.errorClass).size() === 0);
+
+                    var hasErrors = ($(this).find('.' + opts.errorClass).size() > 0);
+
+                    if(hasErrors) {
+                        $(this).find(opts.types).eq(0).focus();
+                    }
+
+                    return (hasErrors === false);
                 });
             });
         }
