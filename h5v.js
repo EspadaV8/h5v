@@ -15,6 +15,35 @@
 
         var opts = $.extend({}, defaults, options);
 
+        var qtipOpts = {
+            'content':
+            {
+                'text': opts.message
+            },
+            'position':
+            {
+                'my': opts.my,
+                'at': opts.at
+            },
+            'show':
+            {
+                'event': false
+            },
+            hide:
+            {
+                'event': 'focusout change'
+            },
+            'events': {
+                hide: function(e, api) {
+                    var isValid = validateInput(api.elements.target);
+                    if(isValid) {
+                        api.elements.target.removeClass(opts.errorClass);
+                    }
+                    return isValid;
+                }
+            }
+        };
+
         if(opts.required) {
             this.each(function() {
                 $(this).attr('novalidate', 'novalidate');
@@ -23,35 +52,6 @@
                     $(this).find(opts.types).each(function() {
                         var self = $(this);
                         if(validateInput(self) === false) {
-                            var qtipOpts = {
-                                'content':
-                                {
-                                    'text': opts.message
-                                },
-                                'position':
-                                {
-                                    'my': opts.my,
-                                    'at': opts.at
-                                },
-                                'show':
-                                {
-                                    'event': false
-                                },
-                                hide:
-                                {
-                                    'event': 'focusout change'
-                                },
-                                'events': {
-                                    hide: function(e, api) {
-                                        var isValid = validateInput(api.elements.target);
-                                        if(isValid) {
-                                            api.elements.target.removeClass(opts.errorClass);
-                                        }
-                                        return isValid;
-                                    }
-                                }
-                            };
-
                             if(opts.customQtip[self.attr('id')] !== undefined) {
                                 qtipOpts = $.extend(true, {}, qtipOpts, opts.customQtip[self.attr('id')]);
                             }
