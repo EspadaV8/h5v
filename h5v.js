@@ -66,13 +66,16 @@
             var self = input;
             var val = self.val();
             var type = self.attr('type');
+            var pattern = self.attr('pattern');
             var isValid = true;
 
             if((type == 'checkbox') || (type == 'radio')) {
                 val = self.is(':checked');
             }
+            else if((type == 'email') && (pattern === undefined)) {
+                pattern = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            }
 
-            var pattern = input.attr('pattern');
             if(pattern !== undefined) {
                 var regex = new RegExp(pattern);
                 isValid = !!val.match(regex);
