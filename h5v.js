@@ -9,7 +9,9 @@
             'at': 'right center',
             'errorClass': 'error',
             'message': 'Please fill in this field',
-            'types': 'input[type!="hidden"], textarea, select'
+            'types': 'input[type!="hidden"], textarea, select',
+            'adjusts': {},
+            'targets': {}
         };
 
         var opts = $.extend({}, defaults, options);
@@ -22,6 +24,12 @@
                     $(this).find(opts.types).each(function() {
                         var self = $(this);
                         if(validateInput(self) === false) {
+                            var adjust = opts.adjusts[self.attr('id')] || {x:0,y:0};
+                            var target = self;
+                            if(opts.targets[self.attr('id')] !== undefined) {
+                                target = $(opts.targets[self.attr('id')]);
+                            }
+
                             self.addClass(opts.errorClass).qtip(
                                 {
                                     content:
@@ -31,7 +39,9 @@
                                     position:
                                     {
                                         my: opts.my,
-                                        at: opts.at
+                                        at: opts.at,
+                                        adjust: adjust,
+                                        target: target
                                     },
                                     show:
                                     {
