@@ -114,7 +114,7 @@
                 var regex = new RegExp(pattern);
                 isValid = !!val.match(regex);
             }
-            else if((input.attr('required') !== undefined) && ((val === "") || (val === false))) {
+            else if((input.attr('required') !== undefined) && (($.trim(val) === "") || (val === false))) {
                 isValid = false;
             }
             return isValid;
