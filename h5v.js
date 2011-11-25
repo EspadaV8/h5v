@@ -7,7 +7,8 @@
             'pattern'  : !Modernizr.input.pattern,
             'my': 'left center',
             'at': 'right center',
-            'errorClass': 'error'
+            'errorClass': 'error',
+            'message': 'Please fill in this field'
         };
 
         var opts = $.extend({}, defaults, options);
@@ -24,7 +25,7 @@
                                 {
                                     content:
                                     {
-                                        text: 'Please fill in this field'
+                                        text: opts.message
                                     },
                                     position:
                                     {
