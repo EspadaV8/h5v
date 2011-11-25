@@ -51,6 +51,10 @@
                 $(this).on('submit', function(e) {
                     $(this).find(opts.types).each(function() {
                         var self = $(this);
+                        if((self.attr('type') === 'radio') &&
+                           ($('input[type="radio"][name="' + self.attr('name') + '"]').index(self) !== 0)) {
+                            return;
+                        }
                         if(validateInput(self) === false) {
                             var localQtipOpts = $.extend(true, {}, qtipOpts);
                             if(opts.customQtip[self.attr('id')] !== undefined) {
@@ -85,8 +89,11 @@
 
             switch(type)
             {
-                case 'checkbox':
                 case 'radio':
+                    var group = $('input[type="radio"][name="' + self.attr('name') + '"]');
+                    val = group.is(':checked');
+                    break;
+                case 'checkbox':
                     val = self.is(':checked');
                     break;
                 case 'email':
