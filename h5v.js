@@ -10,8 +10,7 @@
             'errorClass': 'error',
             'message': 'Please fill in this field',
             'types': 'input[type!="hidden"], textarea, select',
-            'adjusts': {},
-            'targets': {}
+            'customQtip': {}
         };
 
         var opts = $.extend({}, defaults, options);
@@ -24,44 +23,40 @@
                     $(this).find(opts.types).each(function() {
                         var self = $(this);
                         if(validateInput(self) === false) {
-                            var adjust = opts.adjusts[self.attr('id')] || {x:0,y:0};
-                            var target = self;
-                            if(opts.targets[self.attr('id')] !== undefined) {
-                                target = $(opts.targets[self.attr('id')]);
-                            }
-
-                            self.addClass(opts.errorClass).qtip(
+                            var qtipOpts = {
+                                'content':
                                 {
-                                    content:
-                                    {
-                                        text: opts.message
-                                    },
-                                    position:
-                                    {
-                                        my: opts.my,
-                                        at: opts.at,
-                                        adjust: adjust,
-                                        target: target
-                                    },
-                                    show:
-                                    {
-                                        'event': false
-                                    },
-                                    hide: 
-                                    {
-                                        'event': 'focusout change'
-                                    },
-                                    'events': {
-                                        hide: function(e, api) {
-                                            var isValid = validateInput(api.elements.target);
-                                            if(isValid) {
-                                                api.elements.target.removeClass(opts.errorClass);
-                                            }
-                                            return isValid;
+                                    'text': opts.message
+                                },
+                                'position':
+                                {
+                                    'my': opts.my,
+                                    'at': opts.at
+                                },
+                                'show':
+                                {
+                                    'event': false
+                                },
+                                hide:
+                                {
+                                    'event': 'focusout change'
+                                },
+                                'events': {
+                                    hide: function(e, api) {
+                                        var isValid = validateInput(api.elements.target);
+                                        if(isValid) {
+                                            api.elements.target.removeClass(opts.errorClass);
                                         }
+                                        return isValid;
                                     }
                                 }
-                            ).qtip('show');
+                            };
+
+                            if(opts.customQtip[self.attr('id')] !== undefined) {
+                                qtipOpts = $.extend(true, {}, qtipOpts, opts.customQtip[self.attr('id')]);
+                            }
+
+                            self.addClass(opts.errorClass).qtip(qtipOpts).qtip('show');
                         }
                         else
                         {
