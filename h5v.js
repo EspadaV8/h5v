@@ -8,7 +8,8 @@
             'my': 'left center',
             'at': 'right center',
             'errorClass': 'error',
-            'message': 'Please fill in this field'
+            'message': 'Please fill in this field',
+            'types': 'input[type!="hidden"], textarea, select'
         };
 
         var opts = $.extend({}, defaults, options);
@@ -18,7 +19,7 @@
                 $(this).attr('novalidate', 'novalidate');
 
                 $(this).on('submit', function(e) {
-                    $(this).find('input').each(function() {
+                    $(this).find(opts.types).each(function() {
                         var self = $(this);
                         if(validateInput(self) === false) {
                             self.addClass(opts.errorClass).qtip(
