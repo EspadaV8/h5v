@@ -69,11 +69,24 @@
             var pattern = self.attr('pattern');
             var isValid = true;
 
-            if((type == 'checkbox') || (type == 'radio')) {
-                val = self.is(':checked');
-            }
-            else if((type == 'email') && (pattern === undefined)) {
-                pattern = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            switch(type)
+            {
+                case 'checkbox':
+                case 'radio':
+                    val = self.is(':checked');
+                    break;
+                case 'email':
+                    if(pattern === undefined) {
+                        pattern = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                    }
+                    break;
+                case 'number':
+                    if(pattern === undefined) {
+                        pattern = /[0-9]+/;
+                    }
+                    break;
+                default:
+                    break;
             }
 
             if(pattern !== undefined) {
