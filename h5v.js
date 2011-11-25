@@ -11,8 +11,8 @@
 
         var opts = $.extend({}, defaults, options);
 
-        this.each(function() {
-            if(opts.required) {
+        if(opts.required) {
+            this.each(function() {
                 $(this).attr('novalidate', 'novalidate');
 
                 $(this).on('submit', function(e) {
@@ -59,8 +59,8 @@
                     e.preventDefault();
                     return false;
                 });
-            }
-        });
+            });
+        }
 
         function validateInput(input) {
             var self = input;
