@@ -52,11 +52,12 @@
                     $(this).find(opts.types).each(function() {
                         var self = $(this);
                         if(validateInput(self) === false) {
+                            var localQtipOpts = $.extend(true, {}, qtipOpts);
                             if(opts.customQtip[self.attr('id')] !== undefined) {
-                                qtipOpts = $.extend(true, {}, qtipOpts, opts.customQtip[self.attr('id')]);
+                                localQtipOpts = $.extend(true, localQtipOpts, opts.customQtip[self.attr('id')]);
                             }
 
-                            self.addClass(opts.errorClass).qtip(qtipOpts).qtip('show');
+                            self.addClass(opts.errorClass).qtip(localQtipOpts).qtip('show');
                         }
                         else
                         {
