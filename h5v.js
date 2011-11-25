@@ -57,9 +57,7 @@
                             self.removeClass(opts.errorClass);
                         }
                     });
-
-                    e.preventDefault();
-                    return false;
+                    return ($(this).find('.' + opts.errorClass).size() === 0);
                 });
             });
         }
