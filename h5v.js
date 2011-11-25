@@ -6,7 +6,8 @@
             'required' : !Modernizr.input.required,
             'pattern'  : !Modernizr.input.pattern,
             'my': 'left center',
-            'at': 'right center'
+            'at': 'right center',
+            'errorClass': 'error'
         };
 
         var opts = $.extend({}, defaults, options);
@@ -19,7 +20,7 @@
                     $(this).find('input').each(function() {
                         var self = $(this);
                         if(validateInput(self) === false) {
-                            self.addClass('error').qtip(
+                            self.addClass(opts.errorClass).qtip(
                                 {
                                     content:
                                     {
@@ -42,7 +43,7 @@
                                         hide: function(e, api) {
                                             var isValid = validateInput(api.elements.target);
                                             if(isValid) {
-                                                api.elements.target.removeClass('error');
+                                                api.elements.target.removeClass(opts.errorClass);
                                             }
                                             return isValid;
                                         }
@@ -52,7 +53,7 @@
                         }
                         else
                         {
-                            self.removeClass('error');
+                            self.removeClass(opts.errorClass);
                         }
                     });
 
